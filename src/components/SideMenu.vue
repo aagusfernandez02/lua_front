@@ -7,6 +7,7 @@ const emits = defineEmits(['switchMenu']);
 </script>
 
 <template>
+    <div :class="['overlay', props.openedMenu ? 'shown' : 'hidden']"></div>
     <div :class="['menu', props.openedMenu ? 'openedMenu' : 'closedMenu']">
         <!-- Items menu -->
         <div class="listItem">INICIO</div>
@@ -20,7 +21,24 @@ const emits = defineEmits(['switchMenu']);
 </template>
 
 <style scoped lang="scss">
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .85);
+    z-index: 1;
+
+    &.shown {
+        display: block;
+    }
+    &.hidden {
+        display: none;
+    }
+}
 .menu {
+    z-index: 2;
     transition: .5s;
 
     width: 100vw;
@@ -61,6 +79,13 @@ const emits = defineEmits(['switchMenu']);
     }
     &.closedMenu {
         transform: translateX(-100%);
+    }
+}
+
+// Pantallas más grandes (tablet o desktop)
+@media (min-width: 768px) {
+    .menu {
+        width: 60vw;
     }
 }
 </style>
