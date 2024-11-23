@@ -7,7 +7,7 @@ const emits = defineEmits(['switchMenu']);
 </script>
 
 <template>
-    <div :class="['overlay', props.openedMenu ? 'shown' : 'hidden']"></div>
+    <div :class="['overlay', props.openedMenu ? 'shown' : 'hidden']" @click="emits('switchMenu', false)"></div>
     <div :class="['menu', props.openedMenu ? 'openedMenu' : 'closedMenu']">
         <!-- Items menu -->
         <div class="listItem">INICIO</div>
@@ -82,10 +82,17 @@ const emits = defineEmits(['switchMenu']);
     }
 }
 
-// Pantallas más grandes (tablet o desktop)
+// Pantallas pequeñas-medianas
 @media (min-width: 768px) {
     .menu {
         width: 60vw;
+    }
+}
+
+// Pantallas medianas-grandes
+@media (min-width: 1024px) {
+    .menu {
+        width: 40vw;
     }
 }
 </style>
