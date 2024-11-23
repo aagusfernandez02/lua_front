@@ -1,24 +1,23 @@
 <script setup>
+import { ref } from 'vue';
+import AppBar from '@/components/AppBar.vue';
+import SideMenu from '@/components/SideMenu.vue';
+
+const openedMenu = ref(false);
+const switchMenu = (value) => {
+  openedMenu.value = value;
+}
 </script>
 
 <template>
-    <v-app>
-        <v-app-bar :elevation="0">
-            <template v-slot:prepend>
-              <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            </template>
-          
-            <v-app-bar-title>Lua clothes</v-app-bar-title>
-          </v-app-bar>
+    <div>
+        <SideMenu :openedMenu="openedMenu" @switchMenu="switchMenu" />
+        <AppBar @switchMenu="switchMenu" />
     
-        <v-main>
-          <router-view /> <!-- Aquí se renderizan las páginas específicas -->
-        </v-main>
-    
-        <v-footer app>
-          <span>© 2024 Mi App</span>
-        </v-footer>
-      </v-app>
+        <main>
+          <RouterView /> <!-- Aquí se renderizan las páginas específicas -->
+        </main>
+      </div>
 </template>
 
 <style scoped>

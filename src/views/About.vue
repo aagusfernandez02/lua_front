@@ -1,7 +1,7 @@
 <template>
-    <v-container>
+    <div>
       <h1>Acerca de Nosotros</h1>
-    </v-container>
+    </div>
   </template>
   
   <script setup>
