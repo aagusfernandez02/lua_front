@@ -11,9 +11,11 @@ const emits = defineEmits(['switchMenu']);
 
 <style scoped lang="scss">
 .appbar {
-    width: 100vw;
+    width: 100%;
     padding: .5rem 1rem; 
     background-color: $primary-color;
+    
+
     display: flex;
     align-items: center;
     justify-content: space-between;

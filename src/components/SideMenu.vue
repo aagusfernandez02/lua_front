@@ -46,7 +46,7 @@ const emits = defineEmits(['switchMenu']);
     position: fixed;
     top: 0;
     left: 0;
-    background-color: $secondary-color;
+    background-color: $primary-color-contrast;
     display: flex;
     flex-direction: column;
     justify-content: start;
