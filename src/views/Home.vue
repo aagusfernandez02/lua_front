@@ -31,7 +31,7 @@ const destacadosDesktop = [
   {
     img: "https://th.bing.com/th/id/OIP.N4JQ2y93bLpMiD8qKTm95AHaEo?rs=1&pid=ImgDetMain",
     nombre: "Buzos Oversize",
-  }, 
+  },
   {
     img: "https://th.bing.com/th/id/OIP.EgHn22_QB0FerN_hE8J5HwAAAA?rs=1&pid=ImgDetMain",
     nombre: "Jeans",
@@ -43,15 +43,15 @@ const updateIsMobile = () => {
   isMobile.value = window.innerWidth <= 768;
 };
 
-onMounted(()=>{
+onMounted(() => {
   window.addEventListener('resize', updateIsMobile);
   console.log(products)
 });
-onBeforeUnmount(()=>{
+onBeforeUnmount(() => {
   window.removeEventListener('resize', updateIsMobile);
 });
 
-const destacados = computed(()=>(isMobile.value ? destacadosMobile : destacadosDesktop));
+const destacados = computed(() => (isMobile.value ? destacadosMobile : destacadosDesktop));
 </script>
 
 <template>
@@ -61,23 +61,23 @@ const destacados = computed(()=>(isMobile.value ? destacadosMobile : destacadosD
       <h1 class="sectionTitle mt-5">DESTACADOS</h1>
       <div class="destacadosContainer">
         <v-carousel height="100%" width="100%" :show-arrows="false" hide-delimiter-background cycle
-        :interval="destacadosInterval">
-        <v-carousel-item v-for="item in destacados" class="slide">
-          <img :src="item.img" :alt="`Imagen ${item.nombre}`" />
-        </v-carousel-item>
-      </v-carousel>
-    </div>
+          :interval="destacadosInterval">
+          <v-carousel-item v-for="item in destacados" class="slide">
+            <img :src="item.img" :alt="`Imagen ${item.nombre}`" />
+          </v-carousel-item>
+        </v-carousel>
+      </div>
     </section>
 
     <!-- NUESTROS PRODUCTOS -->
     <section>
       <h1 class="sectionTitle mt-10">NUESTROS PRODUCTOS</h1>
-      
+
       <div class="nuestrosProductosContainer">
         <div class="card" v-for="product in products">
           <img :src="product.img" :alt="`Imagen ${product.nombre}`" />
-          <h2>{{product.nombre}}</h2>
-          <p>${{product.precio}}</p>
+          <h2>{{ product.nombre }}</h2>
+          <p>${{ product.precio }}</p>
           <button class="buyButton">COMPRAR</button>
         </div>
       </div>
@@ -93,21 +93,21 @@ main {
   align-items: center;
 
   padding-bottom: 10rem; // Sacar, es para darle espaciado en dev
-  
+
   section {
     width: 100%;
-    
+
     .sectionTitle {
       font-size: 1.75rem;
       font-family: $secondary-font;
       text-align: center;
     }
-  
+
     .destacadosContainer {
       height: 70vh;
       width: 100%;
       padding: 1rem;
-    
+
       .slide {
         img {
           width: 100%;
@@ -115,7 +115,7 @@ main {
           object-fit: cover;
         }
       }
-    
+
     }
 
     .nuestrosProductosContainer {
@@ -125,7 +125,7 @@ main {
       align-items: start;
       flex-wrap: wrap;
       row-gap: 2rem;
-      
+
       .card {
         width: 40%;
 
@@ -134,9 +134,9 @@ main {
         justify-content: space-around;
         align-items: center;
 
-        box-shadow: 0px 15px 15px 0px rgba(0,0,0,0.1);
+        box-shadow: 0px 15px 15px 0px rgba(0, 0, 0, 0.1);
 
-  
+
         img {
           width: 100%;
           height: auto;
@@ -149,16 +149,10 @@ main {
           font-size: 1rem;
         }
 
-        /*.buyButton {
-          padding-top: 1rem; 
-          padding-bottom: 0.5rem; 
-          font-style: italic;
-          text-decoration: underline;
-        }*/
         .buyButton {
-          margin-top: 1rem; 
-          margin-bottom: 0.75rem; 
-          padding: .25rem .75rem; 
+          margin-top: 1rem;
+          margin-bottom: 0.75rem;
+          padding: .25rem .75rem;
 
           background-color: $primary-color;
           color: $primary-color-contrast;
@@ -179,4 +173,31 @@ main {
 
 }
 
+// Pantallas pequeñas-medianas
+@media (min-width: 768px) {
+
+  main {
+    section {
+      .nuestrosProductosContainer {
+        .card {
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+// Pantallas medianas-grandes
+@media (min-width: 1024px) {
+  
+  main {
+    section {
+      .nuestrosProductosContainer {
+        .card {
+          width: 20%;
+        }
+      }
+    }
+  }
+}
 </style>
