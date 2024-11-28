@@ -10,10 +10,8 @@ const emits = defineEmits(['switchMenu']);
     <div :class="['overlay', props.openedMenu ? 'shown' : 'hidden']" @click="emits('switchMenu', false)"></div>
     <div :class="['menu', props.openedMenu ? 'openedMenu' : 'closedMenu']">
         <!-- Items menu -->
-        <div class="listItem">INICIO</div>
-        <div class="listItem">ÚLTIMA CÁPSULA</div>
-        <div class="listItem">CLÁSICOS</div>
-        <div class="listItem">ACERCA DE NOSOTROS</div>
+        <div class="listItem">DESTACADOS</div>
+        <div class="listItem">NUESTROS PRODUCTOS</div>
         
         <!-- Close icon -->
         <button @click="emits('switchMenu', false)"><i class="mdi mdi-close closeIcon"></i></button>
@@ -28,7 +26,7 @@ const emits = defineEmits(['switchMenu']);
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, .85);
-    z-index: 1;
+    z-index: 3;
 
     &.shown {
         display: block;
@@ -38,7 +36,7 @@ const emits = defineEmits(['switchMenu']);
     }
 }
 .menu {
-    z-index: 2;
+    z-index: 4;
     transition: .5s;
 
     width: 100vw;

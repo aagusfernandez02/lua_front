@@ -25,8 +25,8 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
 <template>
   <main>
     <!-- DESTACAODS -->
-    <section>
-      <h1 class="sectionTitle mt-5">DESTACADOS</h1>
+    <section class="pb-10">
+      <h1 class="sectionTitle">DESTACADOS</h1>
       <div class="destacadosContainer">
         <v-carousel height="100%" width="100%" :show-arrows="!isMobile" hide-delimiter-background cycle
           :interval="destacadosInterval">
@@ -38,8 +38,8 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
     </section>
 
     <!-- NUESTROS PRODUCTOS -->
-    <section>
-      <h1 class="sectionTitle mt-10">NUESTROS PRODUCTOS</h1>
+    <section class="separatedSection pt-5">
+      <h1 class="sectionTitle">NUESTROS PRODUCTOS</h1>
 
       <div class="nuestrosProductosContainer">
         <div class="card" v-for="product in products">
@@ -55,10 +55,14 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
 
 <style scoped lang="scss">
 main {
+  margin-top: $appbar-height;
+  padding-top: 1rem;
+
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+
 
   padding-bottom: 10rem; // Sacar, es para darle espaciado en dev
 
@@ -66,7 +70,7 @@ main {
     width: 100%;
 
     .sectionTitle {
-      font-size: 1.75rem;
+      font-size: 2.5rem;
       font-family: $secondary-font;
       text-align: center;
     }
@@ -74,7 +78,7 @@ main {
     .destacadosContainer {
       height: 70vh;
       width: 100%;
-      padding: 1rem;
+      padding: 0rem 1rem;
 
       .slide {
         img {
@@ -85,14 +89,15 @@ main {
       }
 
     }
-
     .nuestrosProductosContainer {
+      position: relative;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
       align-items: start;
       flex-wrap: wrap;
       row-gap: 2rem;
+      padding-top: 1rem;
 
       .card {
         width: 40%;
@@ -137,6 +142,21 @@ main {
       }
     }
 
+  }
+
+  .separatedSection {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85%;
+      height: 1px;
+      background-color: rgba($color: #000000, $alpha: 0.5);
+    }
   }
 
 }
