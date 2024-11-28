@@ -5,42 +5,10 @@ import products from '@/products.json';
 const isMobile = ref(window.innerWidth <= 768);
 
 const destacadosInterval = 5000;
-const destacadosMobile = [
-  {
-    img: "https://acdn.mitiendanube.com/stores/001/806/895/products/img_6527-5356f3e10a42c7e57917305196678455-1024-1024.webp",
-    nombre: "Jogger Comfy",
-  },
-  {
-    img: "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5806-4c8d6e4ea6b77508ea17305210375791-1024-1024.webp",
-    nombre: "Buzo Boxy",
-  },
-  {
-    img: "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5749-d08aa54769eae7abfe17305213670098-1024-1024.webp",
-    nombre: "Buzo Old School",
-  },
-  {
-    img: "https://acdn.mitiendanube.com/stores/001/806/895/products/img_1027-ef304b63653cbdbe4217204798525677-1024-1024.webp",
-    nombre: "Jogger CO Pro!",
-  },
-];
-const destacadosDesktop = [
-  {
-    img: "https://th.bing.com/th/id/OIP.iGxuUoHH2DX0Lm2Ur3VKRAHaDV?rs=1&pid=ImgDetMain",
-    nombre: "Remera Oversize",
-  },
-  {
-    img: "https://th.bing.com/th/id/OIP.N4JQ2y93bLpMiD8qKTm95AHaEo?rs=1&pid=ImgDetMain",
-    nombre: "Buzos Oversize",
-  },
-  {
-    img: "https://th.bing.com/th/id/OIP.EgHn22_QB0FerN_hE8J5HwAAAA?rs=1&pid=ImgDetMain",
-    nombre: "Jeans",
-  }
-];
 
 
 const updateIsMobile = () => {
-  isMobile.value = window.innerWidth <= 768;
+  isMobile.value = window.innerWidth < 768;
 };
 
 onMounted(() => {
@@ -62,8 +30,8 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
       <div class="destacadosContainer">
         <v-carousel height="100%" width="100%" :show-arrows="false" hide-delimiter-background cycle
           :interval="destacadosInterval">
-          <v-carousel-item v-for="item in destacados" class="slide">
-            <img :src="item.img" :alt="`Imagen ${item.nombre}`" />
+          <v-carousel-item v-for="product in products" class="slide">
+            <img :src="isMobile ? product.img_mobile : product.img_desktop" :alt="`Imagen ${product.nombre}`" />
           </v-carousel-item>
         </v-carousel>
       </div>
@@ -75,7 +43,7 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
 
       <div class="nuestrosProductosContainer">
         <div class="card" v-for="product in products">
-          <img :src="product.img" :alt="`Imagen ${product.nombre}`" />
+          <img :src="product.img_mobile" :alt="`Imagen ${product.nombre}`" />
           <h2>{{ product.nombre }}</h2>
           <p>${{ product.precio }}</p>
           <button class="buyButton">COMPRAR</button>
