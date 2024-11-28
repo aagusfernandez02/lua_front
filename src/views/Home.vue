@@ -28,10 +28,10 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
     <section>
       <h1 class="sectionTitle mt-5">DESTACADOS</h1>
       <div class="destacadosContainer">
-        <v-carousel height="100%" width="100%" :show-arrows="false" hide-delimiter-background cycle
+        <v-carousel height="100%" width="100%" :show-arrows="!isMobile" hide-delimiter-background cycle
           :interval="destacadosInterval">
           <v-carousel-item v-for="product in products" class="slide">
-            <img :src="isMobile ? product.img_mobile : product.img_desktop" :alt="`Imagen ${product.nombre}`" />
+            <img :src="isMobile ? product.img_portrait : product.img_landscape" :alt="`Imagen ${product.nombre}`" />
           </v-carousel-item>
         </v-carousel>
       </div>
@@ -43,7 +43,7 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
 
       <div class="nuestrosProductosContainer">
         <div class="card" v-for="product in products">
-          <img :src="product.img_mobile" :alt="`Imagen ${product.nombre}`" />
+          <img :src="product.img_portrait" :alt="`Imagen ${product.nombre}`" />
           <h2>{{ product.nombre }}</h2>
           <p>${{ product.precio }}</p>
           <button class="buyButton">COMPRAR</button>
