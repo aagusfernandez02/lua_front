@@ -1,11 +1,11 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, onUnmounted, ref } from 'vue';
 import products from '@/products.json';
+import CarouselImages from '@/components/CarouselImages.vue';
 
 const isMobile = ref(window.innerWidth <= 768);
 
 const destacadosInterval = 5000;
-
 
 const updateIsMobile = () => {
   isMobile.value = window.innerWidth < 768;
@@ -19,7 +19,8 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', updateIsMobile);
 });
 
-const destacados = computed(() => (isMobile.value ? destacadosMobile : destacadosDesktop));
+
+const images_portrait = computed(() => products.map(item => item.img_landscape));
 </script>
 
 <template>
@@ -28,12 +29,7 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
     <section class="pb-10">
       <h1 class="sectionTitle">DESTACADOS</h1>
       <div class="destacadosContainer">
-        <v-carousel height="100%" width="100%" :show-arrows="!isMobile" hide-delimiter-background cycle
-          :interval="destacadosInterval">
-          <v-carousel-item v-for="product in products" class="slide">
-            <img :src="isMobile ? product.img_portrait : product.img_landscape" :alt="`Imagen ${product.nombre}`" />
-          </v-carousel-item>
-        </v-carousel>
+        <CarouselImages :images="images_portrait" :showArrows="!isMobile" :hide-delimiter-background="true" :cycle="true" :interval="destacadosInterval" />
       </div>
     </section>
 
@@ -43,7 +39,9 @@ const destacados = computed(() => (isMobile.value ? destacadosMobile : destacado
 
       <div class="nuestrosProductosContainer">
         <div class="card" v-for="product in products">
-          <img :src="product.img_portrait" :alt="`Imagen ${product.nombre}`" />
+          <div class="imageContainer">
+            <CarouselImages :images="product.img_portrait" :showArrows="'hover'" :hide-delimiter-background="true" />
+          </div>
           <h2>{{ product.nombre }}</h2>
           <p>${{ product.precio }}</p>
           <button class="buyButton">COMPRAR</button>
@@ -79,15 +77,6 @@ main {
       height: 70vh;
       width: 100%;
       padding: 0rem 1rem;
-
-      .slide {
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
     }
     .nuestrosProductosContainer {
       position: relative;
@@ -110,12 +99,19 @@ main {
         box-shadow: 0px 15px 15px 0px rgba(0, 0, 0, 0.1);
 
 
-        img {
+        .imageContainer {
           width: 100%;
           height: auto;
           //aspect-ratio: 9/16;
           aspect-ratio: 3/4;
           object-fit: cover;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         }
 
         h2 {
@@ -153,7 +149,7 @@ main {
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 85%;
+      width: 90%;
       height: 1px;
       background-color: rgba($color: #000000, $alpha: 0.5);
     }
@@ -171,6 +167,13 @@ main {
           width: 30%;
         }
       }
+    }
+  }
+
+  .separatedSection {
+
+    &::before {
+      width: 85%;
     }
   }
 }

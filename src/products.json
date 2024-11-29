@@ -1,26 +1,42 @@
 [
-    {
-      "nombre": "Jogger Comfy",
-      "precio": 8000,
-      "img_portrait": "https://acdn.mitiendanube.com/stores/001/806/895/products/img_6527-5356f3e10a42c7e57917305196678455-1024-1024.webp",
-      "img_landscape": "https://i.ibb.co/Fmk9D3V/Jogger-comfy-landscape.png"
-    },
-    {
-      "nombre": "Buzo Boxy",
-      "precio": 8000,
-      "img_portrait": "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5806-4c8d6e4ea6b77508ea17305210375791-1024-1024.webp",
-      "img_landscape": "https://i.ibb.co/dL63Wc7/Buzo-boxy-landscape.png"
-    },
-    {
-      "nombre": "Buzo Old School",
-      "precio": 8000,
-      "img_portrait": "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5749-d08aa54769eae7abfe17305213670098-1024-1024.webp",
-      "img_landscape": "https://i.ibb.co/BLmRtVw/Buzo-old-school-landscape.png"
-    },
-    {
-      "nombre": "Jogger CO Pro!",
-      "precio": 8000,
-      "img_portrait": "https://acdn.mitiendanube.com/stores/001/806/895/products/img_1027-ef304b63653cbdbe4217204798525677-1024-1024.webp",
-      "img_landscape": "https://i.ibb.co/HH2fN4c/Jogger-CO-Pro-landscape.png"
-    }
-  ]
+  {
+    "nombre": "Jogger Comfy",
+    "precio": 8000,
+    "img_portrait": [
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_6527-5356f3e10a42c7e57917305196678455-1024-1024.webp",
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_0627-05389703755fb2501017204878827624-640-0.webp"
+    ],
+    "img_landscape": "https://i.ibb.co/Fmk9D3V/Jogger-comfy-landscape.png"
+  },
+  {
+    "nombre": "Buzo Boxy",
+    "precio": 8000,
+    "img_portrait": [
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5806-4c8d6e4ea6b77508ea17305210375791-1024-1024.webp",
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5774-e54352e6b06a1fcf5117305210371209-1024-1024.webp",
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/5-8eda7e11e969b9f16717204764336725-1024-1024.webp"
+    ],
+    "img_landscape": "https://i.ibb.co/dL63Wc7/Buzo-boxy-landscape.png"
+  },
+  {
+    "nombre": "Buzo Old School",
+    "precio": 8000,
+    "img_portrait": [
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5749-d08aa54769eae7abfe17305213670098-1024-1024.webp",
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_7253-883876a33aab4a892517306763592319-1024-1024.webp",
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_7167-75b70183ca1d14fecc17306764121611-1024-1024.webp",
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_6969-49de320dc5025695b717306765178628-1024-1024.webp"
+    ],
+    "img_landscape": "https://i.ibb.co/BLmRtVw/Buzo-old-school-landscape.png"
+  },
+  {
+    "nombre": "Jogger CO Pro!",
+    "precio": 8000,
+    "img_portrait": [
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_1027-ef304b63653cbdbe4217204798525677-1024-1024.webp",
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_7296-fe98a83873f32bde3617305204435102-1024-1024.webp",
+      "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5901-64c7dd58358e05654d17306758918277-1024-1024.webp"
+    ],
+    "img_landscape": "https://i.ibb.co/HH2fN4c/Jogger-CO-Pro-landscape.png"
+  }
+]
