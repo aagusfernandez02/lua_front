@@ -2,15 +2,27 @@
 import { computed, onBeforeUnmount, onMounted, onUnmounted, ref } from 'vue';
 import products from '@/products.json';
 import CarouselImages from '@/components/CarouselImages.vue';
+import ModalCompra from '@/components/ModalCompra.vue';
 
+// Refs and variables
 const isMobile = ref(window.innerWidth <= 768);
-
 const destacadosInterval = 5000;
+const selectedProduct = ref(null);
 
+// Functions
 const updateIsMobile = () => {
   isMobile.value = window.innerWidth < 768;
 };
 
+const openComprarModal = (product) => {
+  selectedProduct.value = product;
+};
+
+const closeComprarModal = () => {
+  selectedProduct.value = null;
+}
+
+// Lifecycle hooks
 onMounted(() => {
   window.addEventListener('resize', updateIsMobile);
   console.log(products)
@@ -19,11 +31,17 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', updateIsMobile);
 });
 
-
+// Computed properties
 const images_portrait = computed(() => products.map(item => item.img_landscape));
 </script>
 
 <template>
+  <ModalCompra 
+    v-if="selectedProduct" 
+    :product="selectedProduct" 
+    @close="closeComprarModal"
+  />
+
   <main>
     <!-- DESTACAODS -->
     <section class="pb-10">
@@ -40,11 +58,11 @@ const images_portrait = computed(() => products.map(item => item.img_landscape))
       <div class="nuestrosProductosContainer">
         <div class="card" v-for="product in products">
           <div class="imageContainer">
-            <CarouselImages :images="product.img_portrait" :showArrows="'hover'" :hide-delimiter-background="true" />
+            <CarouselImages :images="product.img_portrait" :showArrows="!isMobile ? 'hover' : false" :hide-delimiter-background="true" /> 
           </div>
           <h2>{{ product.nombre }}</h2>
           <p>${{ product.precio }}</p>
-          <button class="buyButton">COMPRAR</button>
+          <button class="buyButton" @click="openComprarModal(product)">COMPRAR</button>
         </div>
       </div>
     </section>

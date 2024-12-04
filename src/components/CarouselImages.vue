@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
     images: Array,
-    showArrows: String,
+    showArrows: [String, Boolean],
     hideDelimiterBackground: Boolean,
     cycle: Boolean,
     interval: Number,

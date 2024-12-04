@@ -6,7 +6,9 @@
       "https://acdn.mitiendanube.com/stores/001/806/895/products/img_6527-5356f3e10a42c7e57917305196678455-1024-1024.webp",
       "https://acdn.mitiendanube.com/stores/001/806/895/products/img_0627-05389703755fb2501017204878827624-640-0.webp"
     ],
-    "img_landscape": "https://i.ibb.co/Fmk9D3V/Jogger-comfy-landscape.png"
+    "img_landscape": "https://i.ibb.co/Fmk9D3V/Jogger-comfy-landscape.png",
+    "talles": ["S", "M", "L", "XL", "XXL"],
+    "colores": ["Marrón"]
   },
   {
     "nombre": "Buzo Boxy",
@@ -16,7 +18,9 @@
       "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5774-e54352e6b06a1fcf5117305210371209-1024-1024.webp",
       "https://acdn.mitiendanube.com/stores/001/806/895/products/5-8eda7e11e969b9f16717204764336725-1024-1024.webp"
     ],
-    "img_landscape": "https://i.ibb.co/dL63Wc7/Buzo-boxy-landscape.png"
+    "img_landscape": "https://i.ibb.co/dL63Wc7/Buzo-boxy-landscape.png",
+    "talles": ["S", "M", "L", "XL"],
+    "colores": ["Negro", "Marrón"]
   },
   {
     "nombre": "Buzo Old School",
@@ -27,7 +31,9 @@
       "https://acdn.mitiendanube.com/stores/001/806/895/products/img_7167-75b70183ca1d14fecc17306764121611-1024-1024.webp",
       "https://acdn.mitiendanube.com/stores/001/806/895/products/img_6969-49de320dc5025695b717306765178628-1024-1024.webp"
     ],
-    "img_landscape": "https://i.ibb.co/BLmRtVw/Buzo-old-school-landscape.png"
+    "img_landscape": "https://i.ibb.co/BLmRtVw/Buzo-old-school-landscape.png",
+    "talles": ["S", "M", "L", "XL"],
+    "colores": ["Verde", "Negro"]
   },
   {
     "nombre": "Jogger CO Pro!",
@@ -37,6 +43,8 @@
       "https://acdn.mitiendanube.com/stores/001/806/895/products/img_7296-fe98a83873f32bde3617305204435102-1024-1024.webp",
       "https://acdn.mitiendanube.com/stores/001/806/895/products/img_5901-64c7dd58358e05654d17306758918277-1024-1024.webp"
     ],
-    "img_landscape": "https://i.ibb.co/HH2fN4c/Jogger-CO-Pro-landscape.png"
+    "img_landscape": "https://i.ibb.co/HH2fN4c/Jogger-CO-Pro-landscape.png",
+    "talles": ["S", "M", "L", "XL"],
+    "colores": ["Verde", "Negro", "Marrón"]
   }
 ]
