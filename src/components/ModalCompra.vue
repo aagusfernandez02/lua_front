@@ -1,5 +1,9 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
+import { useStore } from '@/stores/store';
+import { toast } from 'vue3-toastify';
+
+const store = useStore();
 
 // Props and emits
 const props = defineProps({
@@ -10,7 +14,10 @@ const emits = defineEmits(['close']);
 
 // Refs
 const modalShown = ref(false);
-const qty = ref(1);
+const selectedProduct = ref(null);
+const selectedQuantity = ref(1);
+const selectedTalle = ref(null);
+const selectedColor = ref(null);
 
 
 // Functions
@@ -22,16 +29,49 @@ const closeModal = () => {
 };
 
 const increaseQty = () => {
-    qty.value++;
+    selectedQuantity.value++;
 };
 
 const decreaseQty = () => {
-    if (qty.value > 1) {
-        qty.value--;
+    if (selectedQuantity.value > 1) {
+        selectedQuantity.value--;
     }
 };
 
+const selectTalle = (talle) => {
+    if( !selectedProduct.value.talles_disponibles.includes(talle) ) return;
+    selectedTalle.value = talle;
+};
+
+const selectColor = (color) => {
+    if( !selectedProduct.value.colores_disponibles.includes(color) ) return;
+    selectedColor.value = color;
+};
+
+const confirmOrder = () => {
+    if( selectedTalle.value==null || selectedColor.value==null ) {
+        toast.warn('Seleccione un talle y color para continuar', {autoClose: 2000, theme: 'dark', position: 'top-center', hideProgressBar: true});
+        return;
+    }
+
+    const productToAdd = {
+        nombre: selectedProduct.value.nombre,
+        talle: selectedTalle.value,
+        color: selectedColor.value,
+        precioUnidad: selectedProduct.value.precio,
+        qty: selectedQuantity.value,
+        img: selectedProduct.value.img_portrait[0],
+    };
+    store.addProduct(productToAdd);
+    emits('close');
+};
+
+
 // Lifecycle hooks
+onBeforeMount(() => {
+    selectedProduct.value = props.product;
+    console.log(selectedProduct.value)
+});
 onMounted(() => {
     setTimeout(() => {
         modalShown.value = true;
@@ -46,27 +86,37 @@ onUnmounted(() => {
     <div class="overlay" @click="closeModal"></div>
     <div :class="['modalContainer', modalShown ? 'shown' : 'hidden']">
         <i class="mdi mdi-close closeButton" @click="closeModal"></i>
-        <h2 class="nombre">{{ props.product.nombre }}</h2>
-        <p class="precio">$ {{ props.product.precio }}</p>
+        <h2 class="nombre">{{ selectedProduct.nombre }}</h2>
+        <p class="precio">$ {{ selectedProduct.precio }}</p>
         <div class="optionsContainer">
             <p>Talles:</p>
             <ul>
-                <li v-for="talle in props.product.talles" :class="{faltante: !props.product.talles_disponibles.includes(talle)}">{{ talle }}</li>
+                <li
+                    v-for="talle in selectedProduct.talles" 
+                    :key="talle"
+                    :class="{faltante: !selectedProduct.talles_disponibles.includes(talle), selected: selectedTalle === talle}"
+                    @click="selectTalle(talle)"
+                >{{ talle }}</li>
             </ul>
         </div>
         <div class="optionsContainer">
             <p>Colores:</p>
             <ul>
-                <li v-for="color in props.product.colores" :class="{faltante: !props.product.colores_disponibles.includes(color)}">{{ color }}</li>
+                <li
+                    v-for="color in selectedProduct.colores"
+                    :key="color"
+                    :class="{ faltante: !selectedProduct.colores_disponibles.includes(color), selected: selectedColor === color }"
+                    @click="selectColor(color)"
+                >{{ color }}</li>
             </ul>
         </div>
         <div class="actionsContainer">
             <div class="qtyControl">
                 <button @click="decreaseQty"><i class="mdi mdi-minus-box"></i></button>
-                <p class="qty">{{ qty }}</p>
+                <p class="qty">{{ selectedQuantity }}</p>
                 <button @click="increaseQty"><i class="mdi mdi-plus-box"></i></button>
             </div>
-            <button class="addButton">Agregar al carrito</button>
+            <button class="addButton" @click="confirmOrder">Agregar al carrito</button>
         </div>
     </div>
 </template>
@@ -177,6 +227,11 @@ onUnmounted(() => {
     li {
         &.faltante {
             opacity: 0.3;
+        }
+        &.selected {
+            background-color: $primary-color;
+            color: $primary-color-contrast;
+            transform: scale(1.1);
         }
     }
 
