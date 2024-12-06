@@ -8,7 +8,9 @@
     ],
     "img_landscape": "https://i.ibb.co/Fmk9D3V/Jogger-comfy-landscape.png",
     "talles": ["S", "M", "L", "XL", "XXL"],
-    "colores": ["Marrón"]
+    "talles_disponibles": ["S", "M", "L"],
+    "colores": ["Marrón", "Blanco"],
+    "colores_disponibles": ["Marrón"]
   },
   {
     "nombre": "Buzo Boxy",
@@ -20,7 +22,9 @@
     ],
     "img_landscape": "https://i.ibb.co/dL63Wc7/Buzo-boxy-landscape.png",
     "talles": ["S", "M", "L", "XL"],
-    "colores": ["Negro", "Marrón"]
+    "talles_disponibles": ["S", "M", "L"],
+    "colores": ["Negro", "Marrón"],
+    "colores_disponibles": ["Negro", "Marrón"]
   },
   {
     "nombre": "Buzo Old School",
@@ -33,7 +37,9 @@
     ],
     "img_landscape": "https://i.ibb.co/BLmRtVw/Buzo-old-school-landscape.png",
     "talles": ["S", "M", "L", "XL"],
-    "colores": ["Verde", "Negro"]
+    "talles_disponibles": ["S", "M", "L"],
+    "colores": ["Verde", "Negro"],
+    "colores_disponibles": ["Verde", "Negro"]
   },
   {
     "nombre": "Jogger CO Pro!",
@@ -45,6 +51,8 @@
     ],
     "img_landscape": "https://i.ibb.co/HH2fN4c/Jogger-CO-Pro-landscape.png",
     "talles": ["S", "M", "L", "XL"],
-    "colores": ["Verde", "Negro", "Marrón"]
+    "talles_disponibles": ["S", "M", "L"],
+    "colores": ["Verde", "Negro", "Marrón"],
+    "colores_disponibles": ["Verde", "Negro", "Marrón"]
   }
 ]

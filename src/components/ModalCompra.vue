@@ -18,12 +18,12 @@ const closeModal = () => {
     modalShown.value = false;
     setTimeout(() => {
         emits('close');
-    }, 500/2);
+    }, 500 / 2);
 };
 
 const increaseQty = () => {
     qty.value++;
-};  
+};
 
 const decreaseQty = () => {
     if (qty.value > 1) {
@@ -51,18 +51,18 @@ onUnmounted(() => {
         <div class="optionsContainer">
             <p>Talles:</p>
             <ul>
-                <li v-for="talle in props.product.talles">{{ talle }}</li>
+                <li v-for="talle in props.product.talles" :class="{faltante: !props.product.talles_disponibles.includes(talle)}">{{ talle }}</li>
             </ul>
         </div>
         <div class="optionsContainer">
             <p>Colores:</p>
             <ul>
-                <li v-for="color in props.product.colores">{{ color }}</li>
+                <li v-for="color in props.product.colores" :class="{faltante: !props.product.colores_disponibles.includes(color)}">{{ color }}</li>
             </ul>
         </div>
         <div class="actionsContainer">
             <div class="qtyControl">
-                <button @click="decreaseQty"><i class="mdi mdi-minus-box"></i></button> 
+                <button @click="decreaseQty"><i class="mdi mdi-minus-box"></i></button>
                 <p class="qty">{{ qty }}</p>
                 <button @click="increaseQty"><i class="mdi mdi-plus-box"></i></button>
             </div>
@@ -81,6 +81,7 @@ onUnmounted(() => {
     height: 100%;
     z-index: 3;
 }
+
 .modalContainer {
     transition: 0.5s;
 
@@ -125,7 +126,7 @@ onUnmounted(() => {
             flex-direction: row;
             flex-wrap: wrap;
             gap: .5rem;
-            
+
             li {
                 list-style: none;
                 font-size: 1rem;
@@ -152,10 +153,11 @@ onUnmounted(() => {
             width: 30%;
 
             .qty {
-                font-size: 1.5rem;  
+                font-size: 1.5rem;
                 width: 30%;
-                text-align: center;              
+                text-align: center;
             }
+
             button {
                 font-size: 2rem;
             }
@@ -172,11 +174,37 @@ onUnmounted(() => {
         }
     }
 
+    li {
+        &.faltante {
+            opacity: 0.3;
+        }
+    }
+
     &.hidden {
         bottom: -100%;
     }
+
     &.shown {
         bottom: 0;
+    }
+}
+
+// Pantallas medianas-grandes
+@media (min-width: 1024px) {
+
+    .modalContainer {
+        width: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &.hidden {
+            bottom: -100%;
+        }
+
+        &.shown {
+            bottom: 50%;
+            transform: translate(-50%, 50%);
+        }
     }
 }
 </style>
