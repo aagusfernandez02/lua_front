@@ -33,9 +33,8 @@ const increaseQty = () => {
 };
 
 const decreaseQty = () => {
-    if (selectedQuantity.value > 1) {
-        selectedQuantity.value--;
-    }
+    selectedQuantity.value--;
+    
 };
 
 const selectTalle = (talle) => {
@@ -112,7 +111,7 @@ onUnmounted(() => {
         </div>
         <div class="actionsContainer">
             <div class="qtyControl">
-                <button @click="decreaseQty"><i class="mdi mdi-minus-box"></i></button>
+                <button @click="decreaseQty" :disabled="selectedQuantity <= 1"><i class="mdi mdi-minus-box"></i></button>
                 <p class="qty">{{ selectedQuantity }}</p>
                 <button @click="increaseQty"><i class="mdi mdi-plus-box"></i></button>
             </div>
@@ -210,6 +209,9 @@ onUnmounted(() => {
 
             button {
                 font-size: 2rem;
+                &:disabled{
+                    opacity: 0.5;
+                }
             }
         }
 
@@ -232,6 +234,9 @@ onUnmounted(() => {
             background-color: $primary-color;
             color: $primary-color-contrast;
             transform: scale(1.1);
+        }
+        &:hover {
+            cursor: pointer;
         }
     }
 
