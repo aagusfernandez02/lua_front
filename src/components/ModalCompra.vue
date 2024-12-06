@@ -84,38 +84,43 @@ onUnmounted(() => {
 <template>
     <div class="overlay" @click="closeModal"></div>
     <div :class="['modalContainer', modalShown ? 'shown' : 'hidden']">
-        <i class="mdi mdi-close closeButton" @click="closeModal"></i>
-        <h2 class="nombre">{{ selectedProduct.nombre }}</h2>
-        <p class="precio">$ {{ selectedProduct.precio }}</p>
-        <div class="optionsContainer">
-            <p>Talles:</p>
-            <ul>
-                <li
-                    v-for="talle in selectedProduct.talles" 
-                    :key="talle"
-                    :class="{faltante: !selectedProduct.talles_disponibles.includes(talle), selected: selectedTalle === talle}"
-                    @click="selectTalle(talle)"
-                >{{ talle }}</li>
-            </ul>
+        <div class="imageContainer">
+            <img :src="selectedProduct.img_portrait[0]" :alt="`Imagen de ${selectedProduct.nombre}`" />
         </div>
-        <div class="optionsContainer">
-            <p>Colores:</p>
-            <ul>
-                <li
-                    v-for="color in selectedProduct.colores"
-                    :key="color"
-                    :class="{ faltante: !selectedProduct.colores_disponibles.includes(color), selected: selectedColor === color }"
-                    @click="selectColor(color)"
-                >{{ color }}</li>
-            </ul>
-        </div>
-        <div class="actionsContainer">
-            <div class="qtyControl">
-                <button @click="decreaseQty" :disabled="selectedQuantity <= 1"><i class="mdi mdi-minus-box"></i></button>
-                <p class="qty">{{ selectedQuantity }}</p>
-                <button @click="increaseQty"><i class="mdi mdi-plus-box"></i></button>
+        <div class="dataContainer">
+            <i class="mdi mdi-close closeButton" @click="closeModal"></i>
+            <h2 class="nombre">{{ selectedProduct.nombre }}</h2>
+            <p class="precio">$ {{ selectedProduct.precio }}</p>
+            <div class="optionsContainer">
+                <p>Talles:</p>
+                <ul>
+                    <li
+                        v-for="talle in selectedProduct.talles" 
+                        :key="talle"
+                        :class="{faltante: !selectedProduct.talles_disponibles.includes(talle), selected: selectedTalle === talle}"
+                        @click="selectTalle(talle)"
+                    >{{ talle }}</li>
+                </ul>
             </div>
-            <button class="addButton" @click="confirmOrder">Agregar al carrito</button>
+            <div class="optionsContainer">
+                <p>Colores:</p>
+                <ul>
+                    <li
+                        v-for="color in selectedProduct.colores"
+                        :key="color"
+                        :class="{ faltante: !selectedProduct.colores_disponibles.includes(color), selected: selectedColor === color }"
+                        @click="selectColor(color)"
+                    >{{ color }}</li>
+                </ul>
+            </div>
+            <div class="actionsContainer">
+                <div class="qtyControl">
+                    <button @click="decreaseQty" :disabled="selectedQuantity <= 1"><i class="mdi mdi-minus-box"></i></button>
+                    <p class="qty">{{ selectedQuantity }}</p>
+                    <button @click="increaseQty"><i class="mdi mdi-plus-box"></i></button>
+                </div>
+                <button class="addButton" @click="confirmOrder">Agregar al carrito</button>
+            </div>
         </div>
     </div>
 </template>
@@ -136,6 +141,7 @@ onUnmounted(() => {
 
     position: fixed;
     left: 0;
+    
 
     background-color: $primary-color-contrast;
     width: 100%;
@@ -148,98 +154,106 @@ onUnmounted(() => {
     align-items: start;
     padding: 1rem;
     gap: .5rem;
+ 
 
-    .closeButton {
-        position: absolute;
-        right: 1rem;
-        top: .5rem;
-        font-size: 1.5rem;
+    .imageContainer {
+        display: none;
     }
-
-    .nombre {
-        font-size: 1.25rem;
-        font-weight: bold;
-    }
-
-    .precio {
-        font-size: 1.25rem;
-        font-weight: lighter;
-    }
-
-    .optionsContainer {
-        display: flex;
-        flex-direction: column;
-
-        ul {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: .5rem;
-
-            li {
-                list-style: none;
-                font-size: 1rem;
-                padding: .25rem .5rem;
-                border: 1px solid $primary-color;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-        }
-    }
-
-    .actionsContainer {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin-top: 1.5rem;
+    .dataContainer {
         width: 100%;
-
-        .qtyControl {
+        
+        .closeButton {
+            position: absolute;
+            right: 1rem;
+            top: .5rem;
+            font-size: 1.5rem;
+        }
+    
+        .nombre {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    
+        .precio {
+            font-size: 1.25rem;
+            font-weight: lighter;
+        }
+    
+        .optionsContainer {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 30%;
-
-            .qty {
-                font-size: 1.5rem;
-                width: 30%;
-                text-align: center;
-            }
-
-            button {
-                font-size: 2rem;
-                &:disabled{
-                    opacity: 0.5;
+            flex-direction: column;
+    
+            ul {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: .5rem;
+    
+                li {
+                    list-style: none;
+                    font-size: 1rem;
+                    padding: .25rem .5rem;
+                    border: 1px solid $primary-color;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
         }
-
-        .addButton {
-            width: 50%;
-            font-size: 1rem;
-            background-color: #000;
-            color: #fff;
-            border-radius: 5px;
-            padding-top: .5rem;
-            padding-bottom: .5rem;
+    
+        .actionsContainer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 1.5rem;
+            width: 100%;
+    
+            .qtyControl {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30%;
+    
+                .qty {
+                    font-size: 1.5rem;
+                    width: 30%;
+                    text-align: center;
+                }
+    
+                button {
+                    font-size: 2rem;
+                    &:disabled{
+                        opacity: 0.25;
+                    }
+                }
+            }
+    
+            .addButton {
+                width: 50%;
+                font-size: 1rem;
+                background-color: #000;
+                color: #fff;
+                border-radius: 5px;
+                padding-top: .5rem;
+                padding-bottom: .5rem;
+            }
+        }
+    
+        li {
+            &.faltante {
+                opacity: 0.3;
+            }
+            &.selected {
+                background-color: $primary-color;
+                color: $primary-color-contrast;
+                transform: scale(1.1);
+            }
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
-
-    li {
-        &.faltante {
-            opacity: 0.3;
-        }
-        &.selected {
-            background-color: $primary-color;
-            color: $primary-color-contrast;
-            transform: scale(1.1);
-        }
-        &:hover {
-            cursor: pointer;
-        }
-    }
-
+        
     &.hidden {
         bottom: -100%;
     }
@@ -247,6 +261,7 @@ onUnmounted(() => {
     &.shown {
         bottom: 0;
     }
+
 }
 
 // Pantallas medianas-grandes
@@ -254,17 +269,52 @@ onUnmounted(() => {
 
     .modalContainer {
         width: 50%;
-        left: 50%;
-        transform: translateX(-50%);
 
-        &.hidden {
-            bottom: -100%;
+        display: flex;
+        flex-direction: row;;
+    
+        .imageContainer {
+            display: block;
+            width: 50%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
         }
+        .dataContainer {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            padding: 1rem;
+            gap: .5rem;
 
+            &.hidden {
+                bottom: -100%;
+            }
+    
+            &.shown {
+                bottom: 50%;
+                transform: translate(-50%, 50%);
+            }
+        }
+        &.hidden {
+            bottom: 0%;
+            left: 50%;
+            transform: translate(-50%, 100%); 
+        }
+    
         &.shown {
             bottom: 50%;
-            transform: translate(-50%, 50%);
+            left: 50%;
+            transform: translate(-50%, 50%); 
         }
+    
     }
 }
 </style>
