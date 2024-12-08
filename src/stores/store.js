@@ -33,7 +33,50 @@ export const useStore = defineStore('store', {
             this.shoppingCartProducts.reduce((sum, product) => {
                 return sum + (product.precioUnidad * product.qty);
             }, 0);
-        }
+        },
+        addQty(uuid, qty) {
+            const productIndex = this.shoppingCartProducts.products.findIndex(p => p.uuid === uuid);
+
+            if (productIndex === -1) {
+                console.error('store.js > addQty > Producto no encontrado en el carrito');
+                return;
+            }
+
+            const product = this.shoppingCartProducts.products[productIndex];
+            product.qty += qty;
+
+            this.shoppingCartProducts.count += qty;
+            this.shoppingCartProducts.total += qty * product.precioUnidad;
+        },
+        removeQty(uuid, qty) {
+            const productIndex = this.shoppingCartProducts.products.findIndex(p => p.uuid === uuid);
+
+            if (productIndex === -1) {
+                console.error('store.js > removeQty > Producto no encontrado en el carrito');
+                return;
+            }
+
+            const product = this.shoppingCartProducts.products[productIndex];
+            product.qty -= qty;
+
+            this.shoppingCartProducts.count -= qty;
+            this.shoppingCartProducts.total -= qty * product.precioUnidad;
+        },
+        removeProduct(uuid) {
+            const productIndex = this.shoppingCartProducts.products.findIndex(p => p.uuid === uuid);
+
+            if (productIndex === -1) {
+                console.warn('store.js > removeProduct > Producto no encontrado en el carrito');
+                return;
+            }
+
+            const product = this.shoppingCartProducts.products[productIndex];
+
+            this.shoppingCartProducts.count -= product.qty;
+            this.shoppingCartProducts.total -= product.precioUnidad * product.qty;
+
+            this.shoppingCartProducts.products.splice(productIndex, 1);
+        },
     },
     persist: false,
 });

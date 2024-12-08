@@ -2,6 +2,7 @@
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 import { useStore } from '@/stores/store';
 import { toast } from 'vue3-toastify';
+import { v4 as uuidv4 } from 'uuid';
 
 const store = useStore();
 
@@ -54,6 +55,7 @@ const confirmOrder = () => {
     }
 
     const productToAdd = {
+        uuid: uuidv4(),
         nombre: selectedProduct.value.nombre,
         talle: selectedTalle.value,
         color: selectedColor.value,
@@ -287,9 +289,10 @@ onUnmounted(() => {
         }
         .dataContainer {
             width: 50%;
+
             display: flex;
             flex-direction: column;
-            justify-content: start;
+            justify-content: space-around;
             align-items: start;
             padding: 1rem;
             gap: .5rem;

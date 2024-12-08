@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useStore } from '@/stores/store';
 
-const emits = defineEmits(['switchMenu']);
+const emits = defineEmits(['switchMenu', 'switchCart']);
 
 const store = useStore();
 
@@ -12,7 +12,7 @@ const store = useStore();
     <div class="appbar">
         <button @click="emits('switchMenu', true)"><i class="mdi mdi-menu menuIcon"></i></button>
         <h1 class="title">LUA STREET</h1>
-        <button @click="console.log(store.shoppingCartProducts)">
+        <button  @click="emits('switchCart', true)">
             <!-- <i class="mdi mdi-cart cartIcon"></i> -->
             <v-badge :content="store.shoppingCartProducts.count" color="red">
                 <template #badge>
