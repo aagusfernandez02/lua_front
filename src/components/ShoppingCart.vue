@@ -23,6 +23,21 @@ const removeQuantity = (product) => {
 const removeProduct = (product) => {
     store.removeProduct(product.uuid);
 };
+
+const sendWhatsAppMessage = () => {
+    const phoneNumber = import.meta.env.VITE_WP_PHONE_NUMBER;
+    const products = store.shoppingCartProducts.products;
+    const message = products
+        .map(
+            (product) =>
+                `- ${product.nombre}, ${product.color}. Talle: ${product.talle} - x ${product.qty}`   
+        )
+        .join('\n');
+    const totalMessage = `Hola Lua, quiero finalizar la compra de mi pedido con los siguientes productos:\n${message}`;
+    const encodedMessage = encodeURIComponent(totalMessage); // Escapa caracteres especiales
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    window.open(whatsappURL, '_blank'); // Abre WhatsApp Web en una nueva pestaña
+};
 </script>
 
 <template>
@@ -37,19 +52,23 @@ const removeProduct = (product) => {
                     <div class="productDescription">
                         <div><p>{{ product.color }}</p></div>
                         <div><p>{{ product.talle }}</p></div>
+                        <div><p>${{ product.precioUnidad }}</p></div> 
                     </div>
                 </div>
                 <div class="qtyControl">
+                    <button @click="removeProduct(product)"><i class="mdi mdi-delete deleteIcon mr-2"></i></button>
                     <button @click="removeQuantity(product)" :disabled="product.qty <= 1"><i class="mdi mdi-minus-box"></i></button>
                     <p class="qty">{{ product.qty }}</p>
                     <button @click="increaseQuantity(product)"><i class="mdi mdi-plus-box"></i></button>
                 </div>
-                <button @click="removeProduct(product)"><i class="mdi mdi-delete deleteIcon"></i></button>
+                <div class="totalRow">
+                    <div><p>${{ product.precioUnidad  * product.qty }}</p></div>
+                </div>
                 <!-- {{ `${product.nombre} (Talle: ${product.talle} - Color: ${product.color}) | x${product.qty} | $${product.precioUnidad}x${product.qty} ==> $${product.precioUnidad*product.qty}` }} -->
             </li>
         </ul>
-        <h5>Cantidad: x {{ store.shoppingCartProducts.count }}</h5> 
-        <h5>Total: $ {{ store.shoppingCartProducts.total }}</h5>
+        <h5 class="totalPrice">Total: $ {{ store.shoppingCartProducts.total }}</h5>
+        <button class="buyButton" @click="sendWhatsAppMessage">Finalizar compra</button>
         <!-- Close icon -->
         <button @click="emits('switchCart', false)"><i class="mdi mdi-close closeIcon"></i></button>
     </div>
@@ -117,6 +136,8 @@ const removeProduct = (product) => {
                 .productName {
                     font-size: 1rem;
                     font-weight: bold;
+                    width: 100%;
+                    text-align: center;
                 }
 
                 .productDescription {
@@ -150,18 +171,35 @@ const removeProduct = (product) => {
                         opacity: 0.25;
                     }
                 }
+
+                .deleteIcon {
+                    color: $cancel-color;
+                }
             }
-            .deleteIcon {
-                width: 5%;
-                color: $cancel-color;
-            }
-        }       
+        } 
+        
     }
+        .totalPrice {
+            width: 100%;
+            padding: .26rem auto; 
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+        .buyButton {
+            padding: .5rem 1.5rem;  
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            background-color: $primary-color;
+            color: $primary-color-contrast;
+            border-radius: 5px;
+        }
 
     .closeIcon {
         position: absolute;
         top: 1rem;
-        right: 1rem;
+        left: 1rem;
         font-size: 1rem;
     }
 

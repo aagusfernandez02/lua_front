@@ -78,5 +78,5 @@ export const useStore = defineStore('store', {
             this.shoppingCartProducts.products.splice(productIndex, 1);
         },
     },
-    persist: false,
+    persist: true,
 });
