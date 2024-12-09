@@ -92,7 +92,7 @@ main {
     }
 
     .destacadosContainer {
-      height: 70vh;
+      height: 60vh;
       width: 100%;
       padding: 0rem 1rem;
     }
