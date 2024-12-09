@@ -49,8 +49,15 @@ const selectColor = (color) => {
 };
 
 const confirmOrder = () => {
-    if( selectedTalle.value==null || selectedColor.value==null ) {
+    // TALLE Y COLOR SIN VALOR
+    if( selectedTalle.value==null && selectedColor.value==null ) {
         toast.warn('Seleccione un talle y color para continuar', {autoClose: 2000, theme: 'dark', position: 'top-center', hideProgressBar: true});
+        return;
+    }
+    // TALLE O COLOR SIN VALOR
+    if( selectedTalle.value==null || selectedColor.value==null ) {
+        const msg = selectTalle.value==null ? 'Seleccione un color para continuar' : 'Seleccione un talle para continuar';
+        toast.warn(msg, {autoClose: 2000, theme: 'dark', position: 'top-center', hideProgressBar: true});
         return;
     }
 
